@@ -1,61 +1,92 @@
-# Skelebot
-A very basic bot (a "skeleton" bot) that has only minimal commands. This bot takes inspiration from Dylan Warren's (https://github.com/Uhuh) various Discord bots. 
+# GroupFinder
+### This bot assists with the following functions:
+  -	Assist students in finding study groups and tutoring groups
+  -	Automatically create channels for groups to use
+  -	Store professor information for later student reference
+  -	Track students able to act as tutors/helpers for both groups and classes
 
-The "prefix" to the bot is it's mention. Ex:
-@Skelebot status
-
-## Built In Commands
-
-**Command** - *Description* (Extra Information)
-
-
-
-###### Default Commands
-
-**Help** - *Sends a list of all available commands.* (This can also be used by just mentioning the bot)
-
-**Groups** - *Sends a list of all available command groups.* 
-
-**Botstatus** - *Gives information regarding the bot.*
-
-**Status** - *Gives information about the server where the command is run.*
-
-###### Default Developer Command
-
-**Eval** - *Evaluates a piece of code and returns the output.*
-
-## Adding Command Packages
-
-###### Commands
-
-  To add a command, you create a file with an export that is named `commands`. In this export should be an array of Command (interface found in `src/bot.ts`) objects. If this export is not created, the bot will not recognize the file as valid.
+Students and professors interact with the bot directly through the Discord web application. Commands are run by sending messages with the following format:
+  `<prefix> <command> (optional_arg) <arg: arg_type/arg_value> <...compiled_arg>`
   
-  *Side note, any commands with the group set to "Dev" will not show up in the help menu for any members that aren't the Bot Developer. Similarly, other members will be unable to run the `eval` command given above.*
-  
-###### Init
+It should be noted that unless `...` is present, arguments are separated by spaces and putting a space between things **will** register it as a different argument. When `...` is present, the bot automatically appends everything past that point as the argument.
 
-  In case a command package wants to add listeners or affect the client in other ways, there is the option to add a function export which accepts a single parameter - the client. This function will be run before the bot loads all the commands.
-  
-  *The init function will not be run unless the commands export is present.*
-  
-###### Group Overriding
+The "prefix" to the bot is it's Discord user mention. Ex:
+@GroupFinder status
 
-  Any commands without a `group` attribute can have their attribute set to a shared group. This is done by adding a `string` export with the name `group`. 
-  
-## Configuration/Environmental Variables
+## Installation Instructions
+Want to run your own version of GroupFinder? All you need is Node.JS (https://nodejs.org/en/) and this repo. 
+1. Clone the repository (`git clone https://github.com/AndroidWaifu/GroupFinder`)
+2. Install dependencies (`npm install`)
+3. Create a Discord bot at https://discord.com/developers/applications/ (More info on this can be found through Google)
+4. Copy the token from the bot created above
+5. Create the environment file. (Save a file with the name `.env`).
+  - Add the bot token line (`TOKEN="{Put your token here}"`)
+  - (Optional) Add the log level of the bot (`LOG_LVL="{Log Level Desired}"`). Log levels can be found at https://github.com/AndroidWaifu/Skelebot under the Log Level section.
+6. Start the bot (`npm run start`)
 
-  Any configurable options for the bot should be put into a file called `.env`. More about configuring this file can be found at https://www.npmjs.com/package/dotenv. In order for the bot to function, you **must** add the bot's login token into the ENV file (formatted as `TOKEN="{Your Token}"`) or it will be unable to login to Discord. The only other current configuration option found in the .env file is "LOG_LVL". More information on this is given below.
-  
-#### Log Level (LOG_LVL)
+## User Manual (Commands)
+### GroupFinder has 13 commands specific to providing the above functionality. There are 18 commands total.
+*Only the GroupFinder specific commands and the help command will be listed here. For information on the remaining commands, use the help command.*
 
-**Log level is the lowest type of message that should be logged to both the console and to `bot.log`. So if the log level is "INFO", then all other levels are logged. Levels are ranked below, starting at the lowest.**
+### Format
+#### Full Command Name
+  - Syntax
+  - Description
+  - Special Information
 
-"INFO" - *This will be used to provide extra information that may not be needed for daily operation. For example, the bot currently logs the beginning of each file load under this level.*
-
-"DEV" - *This is a debugging tool often used while developing the bot.*
-
-"BOT" - *These are the most basic bot status updates.*
-
-"WARN" - *Anything that goes wrong with the bot that isn't so dangerous it could break the bot. For example, a command file not being loaded because of the module name being mismatched is logged as a warning.*
-
-"ERROR" - *Issues that are considered severe enough they could break the bot or cause problems.*
+#### Help
+  - help <command_group>
+  - Displays the default bot commands
+  - Command groups can be found using the **groups** command found in the help command.
+#### Create Class 
+  - createclass <name>
+  - Create a new class and the corresponding role
+  - Fetches the role if it already exists.
+#### Del Class
+  - delclass <name>
+  - Delete a class
+  - N/A
+#### Registerr
+  - register <name>
+  - Adds users to the student database
+  - N/A
+#### Dropout
+  - dropout
+  - Remove yourself from the student database
+  - N/A
+#### Tutor Class
+  - tutorclass <class> (Official: True/False)
+  - Toggles you as a tutor for 'class'. School-affiliated tutors are considered 'Official'
+  - Marking yourself as "Official" requires special permissions in a Guild. Requires registration as a student.
+#### Tutors
+  - tutors <class>
+  - List the tutors for a class
+  - N/A
+#### Create Group
+  - creategroup <class> <group_name> (max_members)
+  - Create a study or tutor group
+  - N/A
+#### Find Group
+  - findgroup <class>
+  - List the groups for a given class
+  - N/A
+#### Join Group
+  - joingroup <class> <group>
+  - Join a class group
+  - If already a part of a group, this will remove you from the group. (This command may be renamed later)
+#### Tutor Group
+  - tutorgroup <class> <group> (Official: True/False)
+  - Become the tutor for a group
+  - Marking yourself as "Official" requires special permissions in a Guild. Requires registration as a student.
+#### Professor
+  - professor <first_name> <last_name> <email>
+  - Save or update professor information
+  - This command should only be used by the professor attempting to register. Requires special permissions in a Guild.
+#### Save Office
+  - saveoffice <office_name> <...info>
+  - Save or update office information for student reference
+  - Professors can have multiple offices! 
+#### Search Professor
+  - searchprofessor <last_name>
+  - Fetch a professor's email and office hours by last name
+  - N/A
