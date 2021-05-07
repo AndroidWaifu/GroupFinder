@@ -1,0 +1,28 @@
+{
+  "name": "groupfinder",
+  "version": "1.0.0",
+  "description": "A discord bot made for MST CS Discord server, which attempts to match up people for study groups.",
+  "main": "index.js",
+  "dependencies": {
+    "@types/better-sqlite3": "^5.4.1",
+    "better-sqlite3": "^7.1.2",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "log-to-file": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22",
+    "@types/ws": "^7.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "eslint": "^7.18.0",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "launch": "node build/index.js",
+    "start": "npm run build && npm run launch"
+  },
+  "author": "Kameryn West",
+  "license": "ISC"
+}
