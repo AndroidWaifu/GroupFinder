@@ -37,7 +37,7 @@ Want to run your own version of GroupFinder? All you need is Node.JS (https://no
 #### Help
   - help <command_group>
   - Displays the default bot commands
-  - Command groups can be found using the **groups** command found in the help command.
+  - Command groups can be found using the **groups** command found in the help command. This command can also be run by just mentioning the bot.
 #### Create Class 
   - createclass <name>
   - Create a new class and the corresponding role
