@@ -16,13 +16,14 @@ The "prefix" to the bot is it's Discord user mention. Ex:
 ## Installation Instructions
 Want to run your own version of GroupFinder? All you need is Node.JS (https://nodejs.org/en/) and this repo. 
 1. Clone the repository (`git clone https://github.com/AndroidWaifu/GroupFinder`)
-2. Install dependencies (`npm install`)
-3. Create a Discord bot at https://discord.com/developers/applications/ (More info on this can be found through Google)
-4. Copy the token from the bot created above
-5. Create the environment file. (Save a file with the name `.env`).
+2. Change directory into the repo (`cd ./GroupFinder`)
+3. Install dependencies (`npm install`)
+4. Create a Discord bot at https://discord.com/developers/applications/ (More info on this can be found through Google)
+5. Copy the token from the bot created above
+6. Create the environment file. (Save a file with the name `.env`).
   - Add the bot token line (`TOKEN="{Put your token here}"`)
   - (Optional) Add the log level of the bot (`LOG_LVL="{Log Level Desired}"`). Log levels can be found at https://github.com/AndroidWaifu/Skelebot under the Log Level section.
-6. Start the bot (`npm run start`)
+7. Start the bot (`npm run start`)
 
 ## User Manual (Commands)
 ### GroupFinder has 13 commands specific to providing the above functionality. There are 18 commands total.
